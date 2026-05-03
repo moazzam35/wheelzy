@@ -1,0 +1,275 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   WHEELZY — footer.module.css
+   Tokens inherited from globals.css — all colors via CSS variables.
+   No hardcoded color values; footer adapts to dark and light themes.
+═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Wrapper ─────────────────────────────────────────────────────────────── */
+.footer {
+  background: var(--footer-bg);
+  position: relative;
+  overflow: hidden;
+  transition: background 0.35s ease;
+}
+
+/* subtle radial glow at top-center */
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 700px;
+  height: 280px;
+  background: radial-gradient(ellipse at top, rgba(var(--gold-rgb), 0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ── Top gold rule ───────────────────────────────────────────────────────── */
+.topRule {
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(var(--gold-rgb), 0.5) 30%,
+    rgba(var(--gold-rgb), 0.8) 50%,
+    rgba(var(--gold-rgb), 0.5) 70%,
+    transparent 100%
+  );
+}
+
+/* ── Main grid ───────────────────────────────────────────────────────────── */
+.inner {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr;
+  gap: 48px;
+  padding: 72px 6vw 56px;
+}
+
+@media (max-width: 1100px) {
+  .inner { grid-template-columns: 1fr 1fr 1fr; }
+  .brand { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; }
+}
+
+@media (max-width: 640px) {
+  .inner { grid-template-columns: 1fr 1fr; gap: 36px; padding: 56px 5vw 40px; }
+  .brand { grid-column: 1 / -1; grid-template-columns: 1fr; }
+}
+
+@media (max-width: 420px) {
+  .inner { grid-template-columns: 1fr; }
+}
+
+/* ── Brand column ────────────────────────────────────────────────────────── */
+.brand {}
+
+.logo {
+  display: inline-block;
+  font-family: 'Bebas Neue', 'Georgia', serif;
+  font-size: 36px;
+  letter-spacing: 2px;
+  color: var(--gold);
+  text-decoration: none;
+  margin-bottom: 16px;
+  transition: color 0.2s;
+}
+.logo:hover { color: var(--gold-light); }
+
+.tagline {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--footer-text);
+  margin-bottom: 28px;
+  font-style: italic;
+}
+
+/* socials */
+.socials {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 32px;
+}
+
+.socialBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--footer-social-border);
+  background: var(--footer-social-bg);
+  color: var(--text-muted);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  transition: border-color 0.25s, background 0.25s, color 0.25s, transform 0.2s;
+}
+.socialBtn:hover {
+  border-color: var(--gold);
+  background: rgba(var(--gold-rgb), 0.1);
+  color: var(--gold);
+  transform: translateY(-2px);
+}
+
+/* contact */
+.contactBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contactLine {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--footer-text);
+  line-height: 1.5;
+}
+
+.contactIcon {
+  color: var(--gold);
+  font-size: 14px;
+  margin-top: 1px;
+  flex-shrink: 0;
+}
+
+/* ── Link columns ────────────────────────────────────────────────────────── */
+.col {}
+
+.colHead {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+
+.linkList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.link {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--footer-text);
+  text-decoration: none;
+  transition: color 0.2s, padding-left 0.2s;
+  display: inline-block;
+}
+.link:hover {
+  color: var(--gold-light);
+  padding-left: 6px;
+}
+
+/* ── Newsletter bar ──────────────────────────────────────────────────────── */
+.newsletter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  padding: 36px 6vw;
+  border-top: 1px solid var(--footer-border);
+  border-bottom: 1px solid var(--footer-border);
+  flex-wrap: wrap;
+}
+
+.newsletterText {}
+
+.newsletterEyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 4px;
+}
+
+.newsletterSub {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--footer-text);
+}
+
+.newsletterForm {
+  display: flex;
+  gap: 0;
+  flex-shrink: 0;
+}
+
+.input {
+  width: 280px;
+  padding: 13px 20px;
+  background: var(--footer-input-bg);
+  border: 1px solid var(--footer-input-border);
+  border-right: none;
+  border-radius: 2px 0 0 2px;
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+  outline: none;
+  transition: border-color 0.25s, background 0.25s;
+}
+.input::placeholder { color: var(--text-muted); opacity: 0.7; }
+.input:focus {
+  border-color: rgba(var(--gold-rgb), 0.45);
+  background: rgba(var(--gold-rgb), 0.04);
+}
+
+.subscribeBtn {
+  padding: 13px 28px;
+  background: var(--gold);
+  color: var(--obsidian);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 0 2px 2px 0;
+  cursor: pointer;
+  transition: background 0.25s, transform 0.2s;
+  white-space: nowrap;
+}
+.subscribeBtn:hover {
+  background: var(--gold-light);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 700px) {
+  .newsletter { flex-direction: column; align-items: flex-start; }
+  .input { width: 200px; }
+}
+
+/* ── Bottom bar ──────────────────────────────────────────────────────────── */
+.bottomBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 6vw;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.copy {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--footer-text-faint);
+  letter-spacing: 0.5px;
+}
+
+.madeWith {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(var(--gold-rgb), 0.4);
+}

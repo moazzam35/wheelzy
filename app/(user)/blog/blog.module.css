@@ -1,0 +1,389 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   WHEELZY — blog.module.css
+   Dark luxury automotive  |  Gold / Obsidian / Smoke
+   Font stack: "Bebas Neue" display  +  "DM Sans" body
+═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Hero Section ───────────────────────────────────────────────────────── */
+.blogHero {
+  position: relative;
+  width: 100%;
+  height: 60vh;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  text-align: center;
+}
+
+.heroBg {
+  position: absolute;
+  inset: 0;
+  background: var(--obsidian);
+  opacity: 0.7;
+}
+
+.heroScrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(10,10,12,0.3) 0%, rgba(10,10,12,0.8) 100%),
+    linear-gradient(135deg, rgba(201,168,76,0.08) 0%, transparent 100%);
+}
+
+.heroContent {
+  position: relative;
+  z-index: 1;
+  max-width: 700px;
+  padding: 0 6vw;
+}
+
+.eyebrow {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+
+.heroTitle {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(52px, 8vw, 96px);
+  letter-spacing: 4px;
+  color: #fff;
+  line-height: 0.92;
+  margin-bottom: 20px;
+}
+
+.heroSub {
+  font-size: 16px;
+  font-weight: 300;
+  color: rgba(240,237,232,0.65);
+  letter-spacing: 0.5px;
+}
+
+/* ── Filter Section ────────────────────────────────────────────────────── */
+.filterSection {
+  padding: 60px 6vw;
+  background: var(--obsidian);
+  border-bottom: 1px solid var(--border-dim);
+}
+
+.filterInner {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.filterLabel {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+
+.categoryTabs {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.catTab {
+  padding: 10px 24px;
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border-dim);
+  border-radius: 999px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.catTab:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.catTab.active {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--obsidian);
+}
+
+/* ── Blog Grid ─────────────────────────────────────────────────────────── */
+.blogSection {
+  padding: 100px 6vw;
+  background: var(--obsidian);
+}
+
+.postGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 32px;
+  max-width: 1400px;
+  margin: 0 auto;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+}
+
+.postGrid.revealed {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+.postGrid.revealed .postCard {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.postCard {
+  background: var(--surface);
+  border: 1px solid var(--border-dim);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: transform 0.4s var(--ease-out), border-color 0.3s, box-shadow 0.4s;
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.6s var(--ease-out) var(--delay, 0ms),
+              transform 0.6s var(--ease-out) var(--delay, 0ms),
+              border-color 0.3s,
+              box-shadow 0.4s;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+
+.postCard:hover {
+  transform: translateY(-10px) scale(1.02);
+  border-color: var(--border);
+  box-shadow: 0 24px 64px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,168,76,0.12);
+}
+
+.postImageWrap {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background: var(--surface2);
+}
+
+.postImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease-out);
+}
+
+.postCard:hover .postImage {
+  transform: scale(1.1);
+}
+
+.postImageOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(10,10,12,0.65) 0%, transparent 55%);
+}
+
+.category {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: rgba(10,10,12,0.75);
+  border: 1px solid var(--border);
+  padding: 4px 10px;
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+}
+
+.postBody {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.postMeta {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.date {
+  color: var(--text-muted);
+}
+
+.readTime {
+  color: var(--gold);
+}
+
+.postTitle {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px;
+  letter-spacing: 2px;
+  color: var(--text);
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+
+.postExcerpt {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 16px;
+  flex: 1;
+}
+
+.readMore {
+  display: inline-flex;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-decoration: none;
+  transition: gap 0.3s;
+  gap: 6px;
+}
+
+.readMore:hover {
+  gap: 10px;
+}
+
+/* ── CTA Section ───────────────────────────────────────────────────────── */
+.ctaSection {
+  position: relative;
+  padding: 100px 6vw;
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.ctaBg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(201,168,76,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.ctaInner {
+  position: relative;
+  z-index: 1;
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.ctaTitle {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(36px, 5vw, 64px);
+  letter-spacing: 3px;
+  color: var(--text);
+  line-height: 0.95;
+  margin-bottom: 16px;
+}
+
+.ctaSub {
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+}
+
+.ctaForm {
+  display: flex;
+  gap: 12px;
+  max-width: 500px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.emailInput {
+  flex: 1;
+  min-width: 200px;
+  padding: 14px 20px;
+  background: var(--surface2);
+  border: 1px solid var(--border-dim);
+  border-radius: 2px;
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  transition: border-color 0.3s;
+}
+
+.emailInput::placeholder {
+  color: var(--text-muted);
+}
+
+.emailInput:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+
+.subscribeBtn {
+  padding: 14px 36px;
+  background: var(--gold);
+  color: var(--obsidian);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background 0.25s, transform 0.2s;
+}
+
+.subscribeBtn:hover {
+  background: var(--gold-light);
+  transform: translateY(-2px);
+}
+
+/* ── Responsive ────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .blogSection {
+    padding: 60px 6vw;
+  }
+
+  .postGrid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .categoryTabs {
+    gap: 8px;
+  }
+
+  .catTab {
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+
+  .ctaForm {
+    flex-direction: column;
+  }
+
+  .emailInput {
+    width: 100%;
+  }
+}

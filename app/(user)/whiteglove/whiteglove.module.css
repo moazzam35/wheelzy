@@ -1,0 +1,309 @@
+/* ═══════════════════════════════════════════════════════════
+   WHEELZY — whiteglove.module.css
+═══════════════════════════════════════════════════════════ */
+
+.page {
+  background: var(--obsidian);
+  min-height: 100vh;
+  color: var(--text);
+  font-family: "DM Sans", sans-serif;
+}
+
+/* ── Hero ── */
+.hero {
+  position: relative;
+  height: 90vh;
+  min-height: 560px;
+  background: url("/comp/images/mercedes-c63.jfif") center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  padding: 0 6vw;
+  overflow: hidden;
+}
+.heroScrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      to right,
+      rgba(10, 10, 12, 0.92) 0%,
+      rgba(10, 10, 12, 0.5) 55%,
+      rgba(10, 10, 12, 0.15) 100%
+    ),
+    linear-gradient(to top, rgba(10, 10, 12, 0.5) 0%, transparent 50%);
+}
+.heroContent {
+  position: relative;
+  z-index: 1;
+  max-width: 600px;
+}
+.heroCornerBR {
+  position: absolute;
+  bottom: 32px;
+  right: 32px;
+  width: 56px;
+  height: 56px;
+  border-bottom: 2px solid var(--gold);
+  border-right: 2px solid var(--gold);
+  opacity: 0.6;
+}
+.eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+.heroTitle {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: clamp(56px, 8vw, 108px);
+  line-height: 0.9;
+  color: #fff;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+}
+.heroSub {
+  font-size: 16px;
+  font-weight: 300;
+  color: rgba(240, 237, 232, 0.6);
+  line-height: 1.7;
+  margin-bottom: 40px;
+  max-width: 440px;
+}
+.ctaBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 36px;
+  background: var(--gold);
+  color: var(--obsidian);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    background 0.25s,
+    transform 0.2s;
+}
+.ctaBtn:hover {
+  background: var(--gold-light);
+  transform: translateY(-2px);
+}
+
+/* ── Promise ── */
+.promiseSection {
+  padding: 100px 6vw;
+  background: var(--surface);
+}
+.promiseInner {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+@media (max-width: 900px) {
+  .promiseInner {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+}
+.promiseTitle {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: clamp(36px, 4.5vw, 60px);
+  letter-spacing: 3px;
+  color: var(--text);
+  line-height: 0.95;
+  margin: 12px 0 24px;
+}
+.promiseBody {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.85;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+.promiseStats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  border: 1px solid var(--border-dim);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+.stat {
+  padding: 32px 24px;
+  background: var(--surface2);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.statVal {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: clamp(32px, 3.5vw, 48px);
+  color: var(--gold);
+  letter-spacing: 1px;
+  line-height: 1;
+}
+.statLabel {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ── Process ── */
+.processSection {
+  padding: 100px 6vw;
+  background: var(--obsidian);
+}
+.sectionHead {
+  text-align: center;
+  margin-bottom: 64px;
+}
+.sectionTitle {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: clamp(36px, 5vw, 60px);
+  letter-spacing: 4px;
+  color: var(--text);
+  margin-bottom: 16px;
+  line-height: 0.95;
+}
+.titleRule {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold-dark), var(--gold-light));
+  margin: 0 auto;
+}
+
+.processGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+@media (max-width: 900px) {
+  .processGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 560px) {
+  .processGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.processCard {
+  background: var(--surface);
+  border: 1px solid var(--border-dim);
+  border-radius: var(--radius-md);
+  padding: 32px 28px;
+  transition:
+    transform 0.35s,
+    border-color 0.3s,
+    box-shadow 0.35s;
+}
+.processCard:hover {
+  transform: translateY(-6px);
+  border-color: rgba(201, 168, 76, 0.3);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.4);
+}
+.processTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+.processIcon {
+  font-size: 22px;
+  color: var(--gold);
+}
+.processNum {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 36px;
+  color: rgba(201, 168, 76, 0.15);
+  letter-spacing: 2px;
+  line-height: 1;
+}
+.processTitle {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.processBody {
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--text-muted);
+}
+
+/* ── Included ── */
+.includedSection {
+  padding: 100px 6vw;
+  background: var(--surface);
+}
+.includedInner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+@media (max-width: 860px) {
+  .includedInner {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+}
+.includedTitle {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: clamp(36px, 4vw, 56px);
+  letter-spacing: 3px;
+  color: var(--text);
+  line-height: 0.95;
+  margin: 12px 0 20px;
+}
+.includedSub {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--text-muted);
+  margin-bottom: 36px;
+}
+.includedList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid var(--border-dim);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+.includedItem {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 24px;
+  font-size: 14px;
+  color: var(--text);
+  border-bottom: 1px solid var(--border-dim);
+  background: var(--surface2);
+  transition: background 0.25s;
+}
+.includedItem:last-child {
+  border-bottom: none;
+}
+.includedItem:hover {
+  background: var(--obsidian);
+}
+.tick {
+  color: var(--gold);
+  font-size: 10px;
+  flex-shrink: 0;
+}

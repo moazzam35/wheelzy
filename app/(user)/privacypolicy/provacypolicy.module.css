@@ -1,0 +1,172 @@
+/* ── Page root ─────────────────────────────────────────────── */
+.page {
+  font-family: "DM Sans", sans-serif;
+  background: #0a0a0a;
+  color: #e2ddd6;
+  min-height: 100vh;
+}
+
+/* ── Banner ────────────────────────────────────────────────── */
+.pageBanner {
+  position: relative;
+  padding: 5rem 2.5rem 4rem;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(201, 168, 76, 0.18);
+}
+
+.bannerBg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(201, 168, 76, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201, 168, 76, 0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}
+
+.bannerGlow {
+  position: absolute;
+  top: -60px;
+  left: -60px;
+  width: 380px;
+  height: 380px;
+  background: radial-gradient(circle, rgba(201, 168, 76, 0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.bannerCorner {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 220px;
+  height: 220px;
+  border-top: 1px solid rgba(201, 168, 76, 0.12);
+  border-left: 1px solid rgba(201, 168, 76, 0.12);
+  pointer-events: none;
+}
+
+.bannerEyebrow {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #c9a84c;
+  margin: 0 0 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.bannerEyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 28px;
+  height: 1px;
+  background: #c9a84c;
+}
+
+.bannerTitle {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: clamp(3.5rem, 8vw, 6.5rem);
+  line-height: 0.92;
+  letter-spacing: 0.03em;
+  color: #f0ede8;
+  margin: 0 0 1.5rem;
+}
+
+.bannerTitle span {
+  color: #c9a84c;
+}
+
+.bannerSub {
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: #9a9490;
+  max-width: 480px;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ── Legal content wrapper ─────────────────────────────────── */
+.legalWrap {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 3.5rem 2.5rem 5rem;
+}
+
+.legalDate {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #5a5650;
+  margin: 0 0 3rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ── Sections ──────────────────────────────────────────────── */
+.legalSection {
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  gap: 0 1.5rem;
+  margin-bottom: 2.8rem;
+  padding-bottom: 2.8rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.legalSection:last-child {
+  border-bottom: none;
+}
+
+.legalNum {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 1.1rem;
+  color: #c9a84c;
+  opacity: 0.55;
+  padding-top: 0.15rem;
+  letter-spacing: 0.06em;
+}
+
+.legalH2 {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 1.35rem;
+  letter-spacing: 0.08em;
+  color: #f0ede8;
+  margin: 0 0 0.9rem;
+}
+
+.legalDivider {
+  display: none; /* replaced by section border-bottom */
+}
+
+.legalP {
+  font-size: 0.92rem;
+  font-weight: 300;
+  line-height: 1.8;
+  color: #9a9490;
+  margin: 0 0 0.75rem;
+}
+
+.legalP:last-child {
+  margin: 0;
+}
+
+.legalAccent {
+  color: #c9a84c;
+}
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .pageBanner {
+    padding: 3.5rem 1.25rem 3rem;
+  }
+
+  .legalWrap {
+    padding: 2.5rem 1.25rem 4rem;
+  }
+
+  .legalSection {
+    grid-template-columns: 2.2rem 1fr;
+    gap: 0 1rem;
+  }
+}

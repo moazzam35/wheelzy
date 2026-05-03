@@ -1,0 +1,589 @@
+/* ═══════════════════════════════════════════════
+   WHEELZY — Browse Cars Page
+   Tokens: inherited from globals.css — do NOT
+   redeclare :root here, it breaks light mode.
+═══════════════════════════════════════════════ */
+
+/* ── Page ─────────────────────────────────────── */
+.page {
+  background: var(--bg);
+  min-height: 100vh;
+  padding: 0 0 80px;
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+}
+
+/* ── Header ───────────────────────────────────── */
+.pageHeader {
+  text-align: center;
+  padding: 80px 24px 48px;
+  position: relative;
+}
+
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0 0 16px;
+  font-weight: 500;
+}
+
+.title {
+  font-size: clamp(48px, 8vw, 96px);
+  font-weight: 900;
+  letter-spacing: -2px;
+  margin: 0;
+  line-height: 1;
+  color: var(--text);
+}
+
+.titleLine {
+  width: 60px;
+  height: 2px;
+  background: var(--gold);
+  margin: 24px auto 0;
+}
+
+/* ── Filters ──────────────────────────────────── */
+.filterSection {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 32px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.filterGroup {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.filterRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.filterLabel {
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--gold);
+  font-weight: 600;
+  min-width: 48px;
+}
+
+.pills {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.pill {
+  background: transparent;
+  border: 1px solid var(--border-dim);
+  color: var(--text-muted);
+  padding: 7px 16px;
+  border-radius: 2px;
+  font-size: 12px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.pill:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.pillActive {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--obsidian);
+  font-weight: 700;
+}
+
+.sortGroup {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.select {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 8px 16px;
+  border-radius: 2px;
+  font-size: 12px;
+  font-family: inherit;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  padding-right: 32px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23c9a84c' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  transition: border-color 0.2s, background 0.25s;
+}
+
+.select:hover {
+  border-color: var(--gold);
+}
+
+/* ── Results Bar ──────────────────────────────── */
+.resultsBar {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 24px 32px 16px;
+}
+
+.resultsCount {
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* ── Grid ─────────────────────────────────────── */
+.grid {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 24px;
+}
+
+/* ── Card ─────────────────────────────────────── */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-dim);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  border-color: var(--border);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.card:hover .img {
+  transform: scale(1.05);
+}
+
+.tag {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 2;
+  background: var(--gold);
+  color: var(--obsidian);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 2px;
+}
+
+/* ── ONLY CHANGE: image height 220px → 242px (+22px) ── */
+.imgWrap {
+  position: relative;
+  height: 242px;
+  overflow: hidden;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.imgOverlay {
+  position: absolute;
+  inset: 0;
+  /* background: linear-gradient(to top, var(--card-bg) 0%, transparent 60%); */
+}
+
+.cardBody {
+  padding: 20px 22px 22px;
+}
+
+.cardTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.cardBrand {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.cardYear {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.cardName {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 8px;
+  letter-spacing: -0.3px;
+  line-height: 1.2;
+}
+
+.cardStats {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 18px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.dot {
+  color: var(--gold);
+}
+
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--border-dim);
+  padding-top: 16px;
+}
+
+.cardPrice {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.5px;
+}
+
+.viewBtn {
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  padding: 8px 18px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.viewBtn:hover {
+  background: var(--gold);
+  color: var(--obsidian);
+}
+
+/* ── Empty State ──────────────────────────────── */
+.empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 80px 24px;
+  color: var(--text-muted);
+}
+
+.resetBtn {
+  margin-top: 20px;
+  background: var(--gold);
+  color: var(--obsidian);
+  border: none;
+  padding: 12px 28px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 2px;
+  font-family: inherit;
+  transition: opacity 0.2s;
+}
+
+.resetBtn:hover {
+  opacity: 0.85;
+}
+
+/* ══════════════════════════════════════════════
+   MODAL — new classes added for car detail view
+   (no existing classes were modified)
+══════════════════════════════════════════════ */
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: var(--modal-bg);
+  backdrop-filter: blur(14px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.modal {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  width: 100%;
+  max-width: 860px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow:
+    0 50px 120px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(var(--gold-rgb), 0.06);
+  scrollbar-width: none;
+}
+
+.modal::-webkit-scrollbar {
+  display: none;
+}
+
+.modalClose {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 20;
+  width: 36px;
+  height: 36px;
+  border-radius: 2px;
+  background: var(--icon-bg);
+  border: 1px solid var(--icon-border);
+  color: var(--text);
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.modalClose:hover {
+  background: rgba(var(--gold-rgb), 0.15);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.modalImgWrap {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+}
+
+.modalImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.modalImgOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 30%,
+    var(--surface) 100%
+  );
+}
+
+.modalTag {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: var(--gold);
+  color: var(--obsidian);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 2px;
+}
+
+.modalBody {
+  padding: 2rem 2.5rem 2.5rem;
+}
+
+.modalBrand {
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.modalName {
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 900;
+  color: var(--text);
+  letter-spacing: -1px;
+  line-height: 1.1;
+  margin: 0 0 8px;
+}
+
+.modalPrice {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--gold);
+  letter-spacing: -0.5px;
+  margin-bottom: 2rem;
+}
+
+.modalSpecs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+  margin-bottom: 2rem;
+}
+
+.specItem {
+  background: var(--surface2);
+  border: 1px solid var(--border-dim);
+  border-radius: 2px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.specLabel {
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.specVal {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0.2px;
+}
+
+.modalDesc {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+  border-left: 2px solid var(--border);
+  padding-left: 16px;
+}
+
+.modalActions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.modalBtnPrimary {
+  flex: 1;
+  min-width: 150px;
+  padding: 14px 24px;
+  background: var(--gold);
+  color: var(--obsidian);
+  border: none;
+  border-radius: 2px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-family: inherit;
+  transition: opacity 0.2s;
+}
+
+.modalBtnPrimary:hover {
+  opacity: 0.88;
+}
+
+.modalBtnSecondary {
+  flex: 1;
+  min-width: 150px;
+  padding: 14px 24px;
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border-dim);
+  border-radius: 2px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-family: inherit;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.modalBtnSecondary:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+/* ── Responsive ───────────────────────────────── */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+    padding: 0 16px;
+  }
+  .filterSection {
+    padding: 0 16px 32px;
+  }
+  .resultsBar {
+    padding: 20px 16px 12px;
+  }
+  .filterRow {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .modalBody {
+    padding: 1.5rem;
+  }
+  .modalImgWrap {
+    height: 260px;
+  }
+  .modalActions {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .modalName {
+    font-size: 1.6rem;
+  }
+  .modalSpecs {
+    grid-template-columns: 1fr 1fr;
+  }
+}

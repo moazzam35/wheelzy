@@ -1,0 +1,558 @@
+/* ── Page ─────────────────────────────────────────────────── */
+.page {
+  min-height: 100vh;
+  background: var(--obsidian);
+  display: flex;
+  align-items: stretch;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Background effects ───────────────────────────────────── */
+.bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bgGlow1 {
+  position: absolute;
+  top: -150px;
+  right: -100px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(
+    circle,
+    rgba(201, 168, 76, 0.07) 0%,
+    transparent 70%
+  );
+  border-radius: 50%;
+}
+
+.bgGlow2 {
+  position: absolute;
+  bottom: -100px;
+  right: 200px;
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(
+    circle,
+    rgba(201, 168, 76, 0.04) 0%,
+    transparent 70%
+  );
+  border-radius: 50%;
+}
+
+.bgGrid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(201, 168, 76, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201, 168, 76, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* ── Layout ───────────────────────────────────────────────── */
+.layout {
+  display: flex;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Left image side ──────────────────────────────────────── */
+.imageSide {
+  width: 400px;
+  min-width: 400px;
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+}
+
+.sideImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.imageOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(10, 10, 12, 0.55) 0%,
+    rgba(10, 10, 12, 0.3) 50%,
+    rgba(10, 10, 12, 0.75) 100%
+  );
+}
+
+/* Floating stat cards */
+.statsGrid {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 1.5rem;
+  right: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.statCard {
+  background: rgba(10, 10, 12, 0.72);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.7rem 1rem;
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.statValue {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 1.5rem;
+  color: var(--gold);
+  letter-spacing: 0.05em;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.statLabel {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.imageBrand {
+  position: absolute;
+  top: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.imageBrandText {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 1.6rem;
+  letter-spacing: 0.06em;
+  color: var(--text);
+}
+
+.imageBrandText span {
+  color: var(--gold);
+}
+
+.imageBrandSub {
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 0.15rem;
+}
+
+/* ── Right panel ──────────────────────────────────────────── */
+.panel {
+  flex: 1;
+  min-height: 100vh;
+  padding: 2.5rem 3rem 3rem;
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid var(--border-dim);
+  background: var(--panel-bg);
+  overflow-y: auto;
+}
+
+.panelContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.75rem;
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+/* ── Logo ─────────────────────────────────────────────────── */
+.logo {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 1.8rem;
+  letter-spacing: 0.05em;
+  color: var(--text);
+  text-decoration: none;
+  transition: opacity 0.2s;
+  align-self: flex-start;
+}
+
+.logo:hover {
+  opacity: 0.8;
+}
+.logoAccent {
+  color: var(--gold);
+}
+
+/* ── Heading ──────────────────────────────────────────────── */
+.eyebrow {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+}
+
+.title {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 3rem;
+  letter-spacing: 0.06em;
+  color: var(--text);
+  line-height: 1;
+  margin-bottom: 0.65rem;
+}
+
+.subtitle {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+/* ── Form ─────────────────────────────────────────────────── */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.labelRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.inputWrap {
+  position: relative;
+}
+
+.input {
+  width: 100%;
+  padding: 0.78rem 1rem;
+  background: var(--surface2);
+  border: 1px solid var(--border-dim);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-size: 0.88rem;
+  font-family: "DM Sans", sans-serif;
+  outline: none;
+  transition:
+    border-color 0.2s,
+    background 0.2s,
+    box-shadow 0.2s;
+}
+
+.input::placeholder {
+  color: var(--text-muted);
+  opacity: 0.6;
+}
+
+.input:focus {
+  border-color: var(--gold);
+  background: var(--surface3);
+  box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.1);
+}
+
+.inputWrap .input {
+  padding-right: 2.8rem;
+}
+
+.inputError {
+  border-color: var(--red-accent) !important;
+  box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.1) !important;
+}
+
+.inputSuccess {
+  border-color: #27ae60 !important;
+  box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.1) !important;
+}
+
+.eyeBtn {
+  position: absolute;
+  right: 0.85rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  transition: color 0.2s;
+}
+
+.eyeBtn:hover {
+  color: var(--gold);
+}
+
+/* ── Password strength ────────────────────────────────────── */
+.strengthWrap {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.35rem;
+}
+
+.strengthBar {
+  display: flex;
+  gap: 4px;
+  flex: 1;
+}
+
+.strengthSegment {
+  height: 3px;
+  flex: 1;
+  border-radius: 2px;
+  transition: background 0.3s;
+}
+
+.strengthLabel {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  min-width: 42px;
+  text-align: right;
+  transition: color 0.3s;
+}
+
+/* ── Match badge ──────────────────────────────────────────── */
+.matchBadge {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #27ae60;
+  letter-spacing: 0.05em;
+}
+
+/* ── Checkbox ─────────────────────────────────────────────── */
+.checkLabel {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.checkbox {
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  border-radius: 4px;
+  border: 1px solid var(--border-dim);
+  background: var(--surface2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-top: 1px;
+  transition:
+    border-color 0.2s,
+    background 0.2s;
+  color: var(--btn-on-gold);
+}
+
+.checkboxChecked {
+  background: var(--gold);
+  border-color: var(--gold);
+}
+
+.termsLink {
+  color: var(--gold);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.termsLink:hover {
+  opacity: 0.8;
+}
+
+/* ── Error ────────────────────────────────────────────────── */
+.error {
+  font-size: 0.82rem;
+  color: var(--red-accent);
+  background: rgba(192, 57, 43, 0.08);
+  border: 1px solid rgba(192, 57, 43, 0.2);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 0.9rem;
+}
+
+/* ── Submit ───────────────────────────────────────────────── */
+.submitBtn {
+  width: 100%;
+  padding: 0.9rem;
+  background: var(--gold);
+  color: var(--btn-on-gold);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: "DM Sans", sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+}
+
+.submitBtn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+.submitBtn:hover:not(:disabled) {
+  background: var(--gold-light);
+}
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(var(--gold-rgb), 0.3);
+  border-top-color: var(--btn-on-gold);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── Divider ──────────────────────────────────────────────── */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.divider span {
+  flex: 1;
+  height: 1px;
+  background: var(--border-dim);
+}
+
+.divider p {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  letter-spacing: 0.04em;
+}
+
+/* ── Social ───────────────────────────────────────────────── */
+.socialRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.socialBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.7rem;
+  background: var(--surface2);
+  border: 1px solid var(--border-dim);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-size: 0.85rem;
+  font-family: "DM Sans", sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    border-color 0.2s,
+    background 0.2s;
+}
+
+.socialBtn:hover {
+  border-color: var(--border);
+  background: var(--surface3);
+}
+
+/* ── Switch ───────────────────────────────────────────────── */
+.switchText {
+  font-size: 0.83rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.switchLink {
+  color: var(--gold);
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity 0.2s;
+}
+.switchLink:hover {
+  opacity: 0.8;
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 960px) {
+  .imageSide {
+    display: none;
+  }
+  .panel {
+    border-left: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .panel {
+    padding: 2rem 1.5rem;
+  }
+  .title {
+    font-size: 2.5rem;
+  }
+  .row {
+    grid-template-columns: 1fr;
+  }
+  .socialRow {
+    grid-template-columns: 1fr;
+  }
+  .panelContent {
+    padding: 1rem 0;
+  }
+}
+
+/* Theme switching is handled automatically via CSS variables in globals.css.
+   No :global() overrides needed — --panel-bg, --input-bg, --surface2 etc.
+   all resolve correctly for both dark and light themes. */

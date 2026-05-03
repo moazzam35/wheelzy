@@ -1,0 +1,236 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap');
+
+
+:root,
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* ── Core palette ── */
+  --gold:        #c9a84c;
+  --gold-light:  #e2c16e;
+  --gold-dark:   #9c7d32;
+  --gold-rgb:    201, 168, 76;          /* for rgba() usage */
+
+  /* ── Backgrounds ── */
+  --obsidian:    #0a0a0c;
+  --surface:     #111114;
+  --surface2:    #18181d;
+  --surface3:    #22222a;
+  --smoke:       #2a2a35;
+
+  /* ── Aliases (for pages that used --bg / --bg2 / --card-bg) ── */
+  --bg:          #0a0a0c;
+  --bg2:         #111114;
+  --bg3:         #18181d;
+  --card-bg:     #111114;
+
+  /* ── Borders ── */
+  --border:      rgba(201, 168, 76, 0.18);
+  --border-dim:  rgba(255, 255, 255, 0.07);
+
+  /* ── Typography ── */
+  --text:        #f0ede8;
+  --text-muted:  #8a8a95;
+  --text-faint:  rgba(240, 237, 232, 0.45);
+
+  /* ── Accents ── */
+  --red-accent:  #c0392b;
+
+  /* ── Shape ── */
+  --radius-sm:   8px;
+  --radius-md:   16px;
+  --radius-lg:   24px;
+
+  /* ── Easing ── */
+  --ease-out:    cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* ── Header specific ── */
+  --header-bg:         rgba(10, 10, 12, 0.82);
+  --header-bg-scroll:  rgba(0, 0, 0, 0.97);
+  --header-bg-mobile:  #0a0a0c;
+  --header-border:     rgba(201, 168, 76, 0.18);
+  --drawer-bg:         rgba(10, 10, 12, 0.98);
+  --nav-hover-bg:      rgba(255, 255, 255, 0.05);
+  --icon-bg:           rgba(255, 255, 255, 0.06);
+  --icon-border:       rgba(255, 255, 255, 0.1);
+  --icon-color:        #f0ede8;
+
+  /* ── Footer specific ── */
+  --footer-bg:         #0a0a0c;
+  --footer-border:     rgba(255, 255, 255, 0.06);
+  --footer-text:       rgba(240, 237, 232, 0.5);
+  --footer-text-faint: rgba(240, 237, 232, 0.3);
+  --footer-social-bg:  rgba(255, 255, 255, 0.04);
+  --footer-social-border: rgba(255, 255, 255, 0.1);
+  --footer-input-bg:   rgba(255, 255, 255, 0.04);
+  --footer-input-border: rgba(255, 255, 255, 0.1);
+
+  /* ── Overlay / scrim tokens ── */
+  --modal-bg:          rgba(0, 0, 0, 0.88);
+  --panel-bg:          rgba(10, 10, 12, 0.6);
+  --panel-bg-light:    rgba(10, 10, 12, 0.5);
+  --scrim-social-bg:   rgba(10, 10, 12, 0.72);
+
+  /* ── Form elements ── */
+  --input-bg:          var(--surface2);
+  --input-focus-bg:    var(--surface3);
+  --input-border:      var(--border-dim);
+  --btn-on-gold:       #0a0a0c;   /* text color on gold-bg buttons */
+
+  /* ── Convenience aliases (for legacy pages) ── */
+  --gold-dim:          rgba(201, 168, 76, 0.12);
+  --border-subtle:     rgba(255, 255, 255, 0.07);
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+
+  /* ── Core palette ── */
+  --gold:        #b8963f;
+  --gold-light:  #c9a84c;
+  --gold-dark:   #8a7030;
+  --gold-rgb:    184, 150, 63;
+
+  /* ── Backgrounds ── */
+  --obsidian:    #f2f0eb;
+  --surface:     #ffffff;
+  --surface2:    #f5f3ee;
+  --surface3:    #ede9e1;
+  --smoke:       #e0dbd0;
+
+  /* ── Aliases ── */
+  --bg:          #f2f0eb;
+  --bg2:         #ffffff;
+  --bg3:         #f5f3ee;
+  --card-bg:     #ffffff;
+
+  /* ── Borders ── */
+  --border:      rgba(184, 150, 63, 0.25);
+  --border-dim:  rgba(0, 0, 0, 0.08);
+
+  /* ── Typography ── */
+  --text:        #1a1a1a;
+  --text-muted:  #666660;
+  --text-faint:  rgba(30, 30, 30, 0.45);
+
+  /* ── Accents ── */
+  --red-accent:  #c0392b;
+
+  /* ── Header specific ── */
+  --header-bg:         rgba(242, 240, 235, 0.82);
+  --header-bg-scroll:  rgba(242, 240, 235, 0.97);
+  --header-bg-mobile:  #f2f0eb;
+  --header-border:     rgba(184, 150, 63, 0.2);
+  --drawer-bg:         rgba(242, 240, 235, 0.99);
+  --nav-hover-bg:      rgba(0, 0, 0, 0.04);
+  --icon-bg:           rgba(0, 0, 0, 0.05);
+  --icon-border:       rgba(0, 0, 0, 0.1);
+  --icon-color:        #1a1a1a;
+
+  /* ── Footer specific ── */
+  --footer-bg:         #f2f0eb;
+  --footer-border:     rgba(0, 0, 0, 0.06);
+  --footer-text:       rgba(30, 30, 30, 0.55);
+  --footer-text-faint: rgba(30, 30, 30, 0.35);
+  --footer-social-bg:  rgba(0, 0, 0, 0.04);
+  --footer-social-border: rgba(0, 0, 0, 0.1);
+  --footer-input-bg:   rgba(0, 0, 0, 0.04);
+  --footer-input-border: rgba(0, 0, 0, 0.1);
+
+  /* ── Overlay / scrim tokens ── */
+  --modal-bg:          rgba(0, 0, 0, 0.6);
+  --panel-bg:          rgba(242, 240, 235, 0.75);
+  --panel-bg-light:    rgba(242, 240, 235, 0.75);
+  --scrim-social-bg:   rgba(242, 240, 235, 0.82);
+
+  /* ── Form elements ── */
+  --input-bg:          #ffffff;
+  --input-focus-bg:    #ffffff;
+  --input-border:      rgba(0, 0, 0, 0.12);
+  --btn-on-gold:       #1a1a1a;
+
+  /* ── Convenience aliases (for legacy pages) ── */
+  --gold-dim:          rgba(184, 150, 63, 0.12);
+  --border-subtle:     rgba(0, 0, 0, 0.07);
+}
+
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark light;
+}
+
+body {
+  background:             var(--obsidian);
+  color:                  var(--text);
+  font-family:            'DM Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  /* Smooth theme transition — all color-related props */
+  transition:
+    background 0.35s ease,
+    color 0.35s ease;
+}
+
+/* Smooth transition for all themed elements */
+*,
+*::before,
+*::after {
+  transition-property: background-color, border-color, color, box-shadow, opacity;
+  transition-duration: 0.25s;
+  transition-timing-function: ease;
+}
+
+/* Reset transition on elements that need their own (prevents fighting with animations) */
+*[style*="transition"],
+*[class*="animate"],
+button,
+a,
+input,
+select {
+  transition-property: background-color, border-color, color, box-shadow, opacity, transform;
+  transition-duration: 0.25s;
+  transition-timing-function: ease;
+}
+/* add to globals.css */
+@keyframes wheelzy-shimmer {
+  0%   { background-position: -700px 0; }
+  100% { background-position:  700px 0; }
+}
+
+.skeleton {
+  background-color: #18181d;
+  background-image: linear-gradient(
+    90deg,
+    #18181d 25%,
+    #22222a 50%,
+    #18181d 75%
+  );
+  background-size: 700px 100%;
+  animation: wheelzy-shimmer 1.5s infinite linear;
+}
+
+/* gold-tinted shimmer for brand accents (price, logo area) */
+.skeleton-gold {
+  background-color: #1a1508;
+  background-image: linear-gradient(
+    90deg,
+    #1a1508 25%,
+    #2a2010 50%,
+    #1a1508 75%
+  );
+  background-size: 700px 100%;
+  animation: wheelzy-shimmer 1.5s infinite linear;
+}

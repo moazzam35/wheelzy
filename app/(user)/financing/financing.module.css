@@ -1,0 +1,365 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   WHEELZY — financing.module.css
+═══════════════════════════════════════════════════════════════════════════ */
+
+.page {
+  background: #0a0a0c;
+  min-height: 100vh;
+}
+
+/* ── Banner ─────────────────────────────────────────────────────────────── */
+.pageBanner {
+  position: relative;
+  padding: 130px 6vw 80px;
+  background: #0a0a0c;
+  overflow: hidden;
+}
+.pageBanner::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(201, 168, 76, 0.4) 50%,
+    transparent
+  );
+}
+.bannerBg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 60% 80% at 80% 50%,
+    rgba(201, 168, 76, 0.06) 0%,
+    transparent 65%
+  );
+  pointer-events: none;
+}
+.bannerCorner {
+  position: absolute;
+  top: 90px;
+  left: 6vw;
+  width: 48px;
+  height: 48px;
+  border-top: 2px solid rgba(201, 168, 76, 0.5);
+  border-left: 2px solid rgba(201, 168, 76, 0.5);
+}
+.bannerEyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: #c9a84c;
+  margin-bottom: 14px;
+}
+.bannerTitle {
+  font-family: "Bebas Neue", serif;
+  font-size: clamp(52px, 7vw, 96px);
+  letter-spacing: 3px;
+  line-height: 0.92;
+  color: #f0ede8;
+  margin-bottom: 20px;
+}
+.bannerSub {
+  font-size: 16px;
+  font-weight: 300;
+  color: rgba(240, 237, 232, 0.5);
+  max-width: 520px;
+  line-height: 1.7;
+}
+
+/* ── Sections ───────────────────────────────────────────────────────────── */
+.section {
+  padding: 80px 6vw;
+}
+.sectionAlt {
+  padding: 80px 6vw;
+  background: #111114;
+  position: relative;
+}
+.sectionAlt::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 60px,
+    rgba(255, 255, 255, 0.012) 60px,
+    rgba(255, 255, 255, 0.012) 61px
+  );
+  pointer-events: none;
+}
+
+/* ── Section head ───────────────────────────────────────────────────────── */
+.sectionHeadCenter {
+  margin-bottom: 56px;
+  text-align: center;
+}
+.eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: #c9a84c;
+  margin-bottom: 12px;
+}
+.sectionTitle {
+  font-family: "Bebas Neue", serif;
+  font-size: clamp(36px, 4vw, 56px);
+  letter-spacing: 3px;
+  color: #f0ede8;
+  margin-bottom: 14px;
+}
+.titleRuleCenter {
+  width: 48px;
+  height: 2px;
+  background: linear-gradient(90deg, #9c7d32, #e2c16e);
+  margin: 0 auto;
+}
+
+/* ── Plans grid ─────────────────────────────────────────────────────────── */
+.financeGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 64px;
+}
+@media (max-width: 860px) {
+  .financeGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.financeCard {
+  background: #111114;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 16px;
+  padding: 40px 32px;
+  position: relative;
+  transition:
+    border-color 0.3s,
+    transform 0.3s,
+    box-shadow 0.3s;
+}
+.financeCard:hover {
+  border-color: rgba(201, 168, 76, 0.25);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.4);
+}
+.financeCardFeatured {
+  border-color: rgba(201, 168, 76, 0.4);
+  background: linear-gradient(160deg, #111114, #16140e);
+}
+.financeBadge {
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #c9a84c;
+  color: #0a0a0c;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 5px 16px;
+  border-radius: 0 0 8px 8px;
+}
+.financePlanName {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #8a8a95;
+  margin-bottom: 12px;
+}
+.financeRate {
+  font-family: "Bebas Neue", serif;
+  font-size: 56px;
+  color: #c9a84c;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.financeRateSub {
+  font-size: 12px;
+  color: #8a8a95;
+  margin-bottom: 28px;
+}
+.financeFeatures {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+.financeFeature {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(240, 237, 232, 0.65);
+}
+.financeFeature::before {
+  content: "◈";
+  color: #c9a84c;
+  font-size: 10px;
+  flex-shrink: 0;
+}
+
+/* ── Buttons ────────────────────────────────────────────────────────────── */
+.goldBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 14px 36px;
+  background: #c9a84c;
+  color: #0a0a0c;
+  font-family: "DM Sans", sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  transition:
+    background 0.25s,
+    transform 0.2s;
+}
+.goldBtn:hover {
+  background: #e2c16e;
+  transform: translateY(-2px);
+}
+
+.ghostBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 14px 36px;
+  background: transparent;
+  color: #f0ede8;
+  font-family: "DM Sans", sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  border-radius: 2px;
+  cursor: pointer;
+  transition:
+    border-color 0.25s,
+    background 0.25s,
+    transform 0.2s;
+}
+.ghostBtn:hover {
+  border-color: #c9a84c;
+  background: rgba(201, 168, 76, 0.07);
+  transform: translateY(-2px);
+}
+
+/* ── Calculator ─────────────────────────────────────────────────────────── */
+.calcWrap {
+  max-width: 580px;
+  margin: 0 auto;
+}
+
+.formCard {
+  background: #111114;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 16px;
+  padding: 44px;
+}
+@media (max-width: 480px) {
+  .formCard {
+    padding: 28px 20px;
+  }
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+.label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #8a8a95;
+}
+.rangeTrack {
+  width: 100%;
+  accent-color: #c9a84c;
+  margin-top: 8px;
+  cursor: pointer;
+}
+.rangeLabels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #8a8a95;
+  margin-top: 4px;
+}
+
+.calcResult {
+  background: rgba(201, 168, 76, 0.06);
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  border-radius: 12px;
+  padding: 28px;
+  text-align: center;
+  margin-top: 8px;
+}
+.calcResultLabel {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #8a8a95;
+  margin-bottom: 8px;
+}
+.calcResultVal {
+  font-family: "Bebas Neue", serif;
+  font-size: 56px;
+  color: #c9a84c;
+  line-height: 1;
+}
+.calcResultSub {
+  font-size: 11px;
+  color: #8a8a95;
+  margin-top: 8px;
+}
+
+.applyBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 14px 36px;
+  margin-top: 24px;
+  background: #c9a84c;
+  color: #0a0a0c;
+  font-family: "DM Sans", sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  transition:
+    background 0.25s,
+    transform 0.2s;
+}
+.applyBtn:hover {
+  background: #e2c16e;
+  transform: translateY(-2px);
+}

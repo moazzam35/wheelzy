@@ -1,0 +1,473 @@
+/* ═══════════════════════════════════════════════════════════
+   WHEELZY — testdrive.module.css
+═══════════════════════════════════════════════════════════ */
+
+.page {
+  background: var(--obsidian);
+  min-height: 100vh;
+  color: var(--text);
+  font-family: "DM Sans", sans-serif;
+}
+
+/* ── Hero ── */
+.hero {
+  position: relative;
+  height: 70vh;
+  min-height: 460px;
+  background: url("/comp/images/rolls-royce.jfif") center 35% / cover no-repeat;
+  display: flex;
+  align-items: center;
+  padding: 0 6vw;
+  overflow: hidden;
+}
+.heroScrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      to right,
+      rgba(10, 10, 12, 0.92) 0%,
+      rgba(10, 10, 12, 0.55) 55%,
+      rgba(10, 10, 12, 0.2) 100%
+    ),
+    linear-gradient(to top, rgba(10, 10, 12, 0.6) 0%, transparent 40%);
+}
+.heroContent {
+  position: relative;
+  z-index: 1;
+}
+.heroAccent {
+  position: absolute;
+  right: 6vw;
+  bottom: 40px;
+  width: 200px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold));
+}
+.eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+.heroTitle {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: clamp(56px, 8vw, 104px);
+  line-height: 0.9;
+  color: #fff;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+}
+.heroSub {
+  font-size: 16px;
+  font-weight: 300;
+  color: rgba(240, 237, 232, 0.6);
+  line-height: 1.7;
+  max-width: 420px;
+}
+
+/* ── Step Bar ── */
+.stepBar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 32px 6vw;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border-dim);
+}
+.stepItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.stepCircle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--border-dim);
+  background: var(--surface2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-muted);
+  transition: all 0.3s;
+}
+.stepItem.active .stepCircle {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: rgba(201, 168, 76, 0.1);
+}
+.stepItem.done .stepCircle {
+  border-color: var(--gold);
+  color: var(--obsidian);
+  background: var(--gold);
+}
+.stepLabel {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.stepItem.active .stepLabel,
+.stepItem.done .stepLabel {
+  color: var(--text);
+}
+.stepConnector {
+  width: 60px;
+  height: 1px;
+  background: var(--border-dim);
+  margin: 0 16px;
+}
+@media (max-width: 600px) {
+  .stepConnector {
+    width: 24px;
+    margin: 0 8px;
+  }
+  .stepLabel {
+    display: none;
+  }
+}
+
+/* ── Shared ── */
+.sectionHead {
+  text-align: center;
+  margin-bottom: 56px;
+  padding-top: 80px;
+}
+.sectionTitle {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: clamp(32px, 4.5vw, 56px);
+  letter-spacing: 4px;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+.titleRule {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold-dark), var(--gold-light));
+  margin: 0 auto;
+}
+
+/* ── Vehicle Grid ── */
+.pickSection {
+  padding: 0 6vw 100px;
+  background: var(--obsidian);
+}
+.vehicleGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 48px;
+}
+@media (max-width: 900px) {
+  .vehicleGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 560px) {
+  .vehicleGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.vehicleCard {
+  border: 2px solid var(--border-dim);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--surface);
+  transition: all 0.3s;
+}
+.vehicleCard:hover {
+  border-color: rgba(201, 168, 76, 0.4);
+  transform: translateY(-4px);
+}
+.vehicleSelected {
+  border-color: var(--gold) !important;
+  box-shadow:
+    0 0 0 1px var(--gold),
+    0 16px 40px rgba(201, 168, 76, 0.15);
+}
+.vehicleImg {
+  position: relative;
+  height: 180px;
+  overflow: hidden;
+}
+.vehicleImg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+.vehicleCard:hover .vehicleImg img {
+  transform: scale(1.06);
+}
+.vehicleOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(10, 10, 12, 0.5) 0%,
+    transparent 50%
+  );
+}
+.checkMark {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--obsidian);
+  font-size: 16px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.vehicleInfo {
+  padding: 16px 18px;
+}
+.vehicleType {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+.vehicleName {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.stepNav {
+  text-align: center;
+}
+.nextBtn {
+  padding: 14px 40px;
+  background: var(--gold);
+  color: var(--obsidian);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.nextBtn:hover {
+  background: var(--gold-light);
+  transform: translateY(-2px);
+}
+.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.disabled:hover {
+  transform: none;
+}
+
+/* ── Form Section ── */
+.formSection {
+  padding: 0 6vw 100px;
+  background: var(--obsidian);
+}
+.formWrap {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 40px;
+  align-items: start;
+}
+@media (max-width: 860px) {
+  .formWrap {
+    grid-template-columns: 1fr;
+  }
+}
+
+.selectedCar {
+  background: var(--surface);
+  border: 1px solid var(--border-dim);
+  border-radius: var(--radius-md);
+  padding: 24px;
+}
+.label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+  display: block;
+}
+.selectedCardInner {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.selectedImg {
+  width: 80px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+.selectedType {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+.selectedName {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
+}
+.changeBtn {
+  background: transparent;
+  border: 1px solid var(--border-dim);
+  color: var(--text-muted);
+  font-size: 12px;
+  padding: 8px 16px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.25s;
+  font-family: "DM Sans", sans-serif;
+}
+.changeBtn:hover {
+  border-color: var(--gold);
+  color: var(--text);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border-dim);
+  border-radius: var(--radius-md);
+  padding: 36px;
+}
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+@media (max-width: 560px) {
+  .formRow {
+    grid-template-columns: 1fr;
+  }
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.input,
+.select {
+  padding: 12px 16px;
+  background: var(--surface2);
+  border: 1px solid var(--border-dim);
+  border-radius: 2px;
+  color: var(--text);
+  font-family: "DM Sans", sans-serif;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.25s;
+}
+.input:focus,
+.select:focus {
+  border-color: var(--gold);
+}
+.input::placeholder {
+  color: var(--text-muted);
+}
+.submitBtn {
+  padding: 15px;
+  background: var(--gold);
+  color: var(--obsidian);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.25s;
+  font-family: "DM Sans", sans-serif;
+}
+.submitBtn:hover {
+  background: var(--gold-light);
+  transform: translateY(-2px);
+}
+
+/* ── Success ── */
+.successSection {
+  padding: 120px 6vw;
+  background: var(--obsidian);
+}
+.successInner {
+  max-width: 560px;
+  margin: 0 auto;
+  text-align: center;
+}
+.successIcon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+  color: var(--obsidian);
+  font-size: 36px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+}
+.successTitle {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: clamp(40px, 6vw, 72px);
+  letter-spacing: 3px;
+  color: var(--text);
+  line-height: 0.92;
+  margin: 12px 0 20px;
+}
+.successMsg {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--text-muted);
+  margin-bottom: 40px;
+}
+.ctaBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 36px;
+  background: var(--gold);
+  color: var(--obsidian);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.25s;
+}
+.ctaBtn:hover {
+  background: var(--gold-light);
+  transform: translateY(-2px);
+}

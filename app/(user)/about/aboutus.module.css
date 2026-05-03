@@ -1,0 +1,434 @@
+
+
+.page {
+  background: var(--bg);
+  min-height: 100vh;
+  color: var(--text);
+  font-family: 'DM Sans ', sans-serif;
+}
+
+/* ── Hero ─────────────────────────────────────── */
+.hero {
+  position: relative;
+  height: 520px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.heroBg {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to right, var(--obsidian) 40%, transparent 100%),
+    linear-gradient(to top, var(--obsidian) 0%, transparent 50%),
+    radial-gradient(
+      ellipse at 70% 50%,
+      rgba(var(--gold-rgb), 0.07) 0%,
+      transparent 60%
+    );
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+  padding: 0 64px 72px;
+  max-width: 700px;
+}
+
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0 0 16px;
+  font-weight: 500;
+}
+
+.heroTitle {
+  font-size: clamp(56px, 8vw, 110px);
+  font-weight: 900;
+  letter-spacing: -3px;
+  margin: 0 0 24px;
+  line-height: 0.9;
+}
+
+.heroText {
+  font-size: 16px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin: 0;
+  max-width: 480px;
+}
+
+/* ── Stats ────────────────────────────────────── */
+.statsSection {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.stat {
+  padding: 40px 32px;
+  text-align: center;
+  border-right: 1px solid var(--border-dim);
+  transition: background 0.3s;
+}
+
+.stat:last-child {
+  border-right: none;
+}
+.stat:hover {
+  background: var(--surface2);
+}
+
+.statVal {
+  display: block;
+  font-size: clamp(36px, 4vw, 54px);
+  font-weight: 900;
+  color: var(--gold);
+  letter-spacing: -2px;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.statLabel {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+/* ── Story ────────────────────────────────────── */
+.storySection {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 96px 64px;
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.sectionEyebrow {
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--gold);
+  text-transform: uppercase;
+  font-weight: 600;
+  margin: 0 0 16px;
+}
+
+.storyTitle {
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 900;
+  letter-spacing: -2px;
+  line-height: 1;
+  margin: 0;
+}
+
+.storyP {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin: 0 0 20px;
+}
+
+.storyAccent {
+  border-left: 2px solid var(--gold);
+  padding: 16px 0 16px 24px;
+  margin-top: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.storyQuote {
+  font-size: 17px;
+  font-style: italic;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.storyAuthor {
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* ── Values ───────────────────────────────────── */
+.valuesSection {
+  background: var(--surface);
+  border-top: 1px solid var(--border-dim);
+  border-bottom: 1px solid var(--border-dim);
+  padding: 80px 64px;
+}
+
+.valuesHeader {
+  max-width: 1200px;
+  margin: 0 auto 48px;
+}
+
+.valuesTitle {
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 900;
+  letter-spacing: -2px;
+  margin: 0;
+}
+
+.valuesGrid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.valueCard {
+  background: var(--surface2);
+  border: 1px solid var(--border-dim);
+  border-radius: 4px;
+  padding: 32px 28px;
+  transition:
+    border-color 0.3s,
+    transform 0.3s;
+}
+
+.valueCard:hover {
+  border-color: var(--border);
+  transform: translateY(-4px);
+}
+
+.valueIcon {
+  display: block;
+  font-size: 28px;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+
+.valueTitle {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 12px;
+  letter-spacing: -0.3px;
+}
+
+.valueDesc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ── Team ─────────────────────────────────────── */
+.teamSection {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 96px 64px;
+}
+
+.teamHeader {
+  margin-bottom: 48px;
+}
+
+.teamTitle {
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 900;
+  letter-spacing: -2px;
+  margin: 0;
+}
+
+.teamGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.teamCard {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  background: var(--surface);
+  border: 1px solid var(--border-dim);
+  border-radius: 4px;
+  padding: 28px;
+  transition: border-color 0.3s;
+}
+
+.teamCard:hover {
+  border-color: var(--border);
+}
+
+.avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(var(--gold-rgb), 0.12);
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.avatarInitial {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--gold);
+}
+
+.teamInfo {
+  flex: 1;
+}
+
+.teamName {
+  font-size: 17px;
+  font-weight: 700;
+  margin: 0 0 4px;
+}
+
+.teamRole {
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin: 0 0 12px;
+}
+
+.teamQuote {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-style: italic;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ── CTA Banner ───────────────────────────────── */
+.ctaBanner {
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+  padding: 80px 64px;
+  text-align: center;
+}
+
+.ctaInner {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.ctaEyebrow {
+  font-size: 11px;
+  letter-spacing: 5px;
+  color: var(--gold);
+  text-transform: uppercase;
+  font-weight: 500;
+  margin: 0 0 16px;
+}
+
+.ctaTitle {
+  font-size: clamp(36px, 5vw, 60px);
+  font-weight: 900;
+  letter-spacing: -2px;
+  margin: 0 0 36px;
+}
+
+.ctaBtns {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+}
+
+.btnPrimary {
+  background: var(--gold);
+  border: none;
+  color: var(--btn-on-gold);
+  padding: 14px 32px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 2px;
+  font-family: inherit;
+  transition: background 0.2s;
+}
+
+.btnPrimary:hover {
+  background: var(--gold-light);
+}
+
+.btnGhost {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 14px 32px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 2px;
+  font-family: inherit;
+  transition:
+    border-color 0.2s,
+    color 0.2s;
+}
+
+.btnGhost:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+/* ── Responsive ───────────────────────────────── */
+@media (max-width: 1024px) {
+  .valuesGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .statsSection {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .stat {
+    border-bottom: 1px solid var(--border-subtle);
+  }
+}
+
+@media (max-width: 768px) {
+  .storySection {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 48px 24px;
+  }
+  .heroContent {
+    padding: 0 24px 48px;
+  }
+  .teamGrid {
+    grid-template-columns: 1fr;
+  }
+  .valuesSection {
+    padding: 56px 24px;
+  }
+  .teamSection {
+    padding: 56px 24px;
+  }
+  .ctaBanner {
+    padding: 56px 24px;
+  }
+  .ctaBtns {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .statsSection {
+    grid-template-columns: 1fr 1fr;
+  }
+  .valuesGrid {
+    grid-template-columns: 1fr;
+  }
+}
