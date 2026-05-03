@@ -9,10 +9,9 @@ const nextConfig = {
     dangerouslyAllowSVG: false,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     remotePatterns: [],
-    unoptimized: false,
+    unoptimized: true,
   },
   compress: true,
-  swcMinify: true,
   poweredByHeader: false,
   generateEtags: true,
 };
