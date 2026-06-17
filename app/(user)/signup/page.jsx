@@ -1,7 +1,9 @@
 "use client";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { useAuth } from "@/hooks/useAuth";
 import styles from "./signup.module.css";
 
 const EyeIcon = ({ open }) =>
@@ -41,6 +43,8 @@ const strengthLabels = ["", "Weak", "Fair", "Good", "Strong"];
 const strengthColors = ["", "#c0392b", "#e67e22", "#c9a84c", "#27ae60"];
 
 export default function SignupPage() {
+  const router = useRouter();
+  const { register } = useAuth();
   const [form, setForm]         = useState({ firstName: "", lastName: "", email: "", password: "", confirm: "" });
   const [showPass, setShowPass] = useState(false);
   const [showConf, setShowConf] = useState(false);
@@ -68,9 +72,17 @@ export default function SignupPage() {
       setError("Please accept the terms to continue."); return;
     }
     setLoading(true);
-    await new Promise(r => setTimeout(r, 1500));
+    const result = await register({
+      name: `${form.firstName} ${form.lastName}`.trim(),
+      email: form.email,
+      password: form.password,
+    });
     setLoading(false);
-    // Replace with your actual auth logic
+    if (result.success) {
+      router.push("/login?registered=true");
+    } else {
+      setError(result.error || "Registration failed. Please try again.");
+    }
   };
 
   return (

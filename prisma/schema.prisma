@@ -1,0 +1,111 @@
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum UserRole {
+  USER
+  ADMIN
+}
+
+enum OrderStatus {
+  PENDING
+  COMPLETED
+  CANCELLED
+}
+
+enum BookingStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model User {
+  id               String      @id @default(cuid())
+  email            String      @unique
+  password         String
+  name             String
+  role             UserRole    @default(USER)
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+  favorites        Favorite[]
+  bookings         Booking[]
+  orders           Order[]
+  messagesSent     Message[]   @relation("SentMessages")
+  messagesReceived Message[]   @relation("ReceivedMessages")
+}
+
+model Car {
+  id          Int        @id @default(autoincrement())
+  name        String
+  brand       String
+  type        String
+  price       Int
+  year        Int
+  hp          Int
+  image       String
+  tag         String?
+  description String
+  specs       Json       // stores topSpeed, acceleration, engine, drivetrain
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  favorites   Favorite[]
+  bookings    Booking[]
+  orders      Order[]
+  messages    Message[]
+}
+
+model Favorite {
+  id        String   @id @default(uuid())
+  userId    String
+  carId     Int
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  car       Car      @relation(fields: [carId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([userId, carId])
+}
+
+model Order {
+  id              String      @id @default(uuid())
+  userId          String
+  carId           Int
+  pricePaid       Int
+  status          OrderStatus @default(PENDING)
+  stripeSessionId String?     @unique
+  user            User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  car             Car         @relation(fields: [carId], references: [id], onDelete: Cascade)
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+}
+
+model Booking {
+  id        String        @id @default(uuid())
+  userId    String
+  carId     Int
+  date      DateTime
+  timeSlot  String
+  status    BookingStatus @default(PENDING)
+  user      User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  car       Car           @relation(fields: [carId], references: [id], onDelete: Cascade)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+}
+
+model Message {
+  id         String   @id @default(uuid())
+  senderId   String
+  receiverId String?
+  carId      Int?
+  subject    String?
+  content    String
+  isRead     Boolean  @default(false)
+  sender     User     @relation("SentMessages", fields: [senderId], references: [id], onDelete: Cascade)
+  receiver   User?    @relation("ReceivedMessages", fields: [receiverId], references: [id], onDelete: Cascade)
+  car        Car?     @relation(fields: [carId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}

@@ -7,6 +7,7 @@ import {
   motion, AnimatePresence,
   useReducedMotion, useScroll, useTransform
 } from "framer-motion";
+import { useAuth } from "@/hooks/useAuth";
 import styles from "./header.module.css";
 
 // ── Icons ────────────────────────────────────────────────────
@@ -55,6 +56,7 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [theme, setTheme]       = useState("dark");
   const [scrolled, setScrolled] = useState(false);
+  const { isAuthenticated, user, logout } = useAuth();
 
   const isReduced = useReducedMotion();
   const pathname  = usePathname();
@@ -160,17 +162,30 @@ export default function Header() {
               </AnimatePresence>
             </motion.button>
 
-            {/* Login button */}
-            <Link href="/login">
-              <motion.div
-                className={`${styles.loginBtn} ${pathname === "/login" ? styles.loginBtnActive : ""}`}
-                whileHover={isReduced ? {} : { scale: 1.04 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <UserIcon />
-                <span>Login</span>
-              </motion.div>
-            </Link>
+            {/* Login button or User Menu */}
+            {isAuthenticated ? (
+              <Link href="/dashboard">
+                <motion.div
+                  className={`${styles.loginBtn} ${pathname === "/dashboard" ? styles.loginBtnActive : ""}`}
+                  whileHover={isReduced ? {} : { scale: 1.04 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <UserIcon />
+                  <span>{user?.name?.split(" ")[0] || "Dashboard"}</span>
+                </motion.div>
+              </Link>
+            ) : (
+              <Link href="/login">
+                <motion.div
+                  className={`${styles.loginBtn} ${pathname === "/login" ? styles.loginBtnActive : ""}`}
+                  whileHover={isReduced ? {} : { scale: 1.04 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <UserIcon />
+                  <span>Login</span>
+                </motion.div>
+              </Link>
+            )}
 
             {/* Hamburger */}
             <button
@@ -231,10 +246,17 @@ export default function Header() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: (navLinks.length + 1) * 0.06 }}
                 >
-                  <Link href="/login" className={styles.drawerLogin}>
-                    <UserIcon />
-                    <span>Login / My Account</span>
-                  </Link>
+                  {isAuthenticated ? (
+                    <Link href="/dashboard" className={styles.drawerLogin}>
+                      <UserIcon />
+                      <span>{user?.name || "Dashboard"}</span>
+                    </Link>
+                  ) : (
+                    <Link href="/login" className={styles.drawerLogin}>
+                      <UserIcon />
+                      <span>Login / My Account</span>
+                    </Link>
+                  )}
                 </motion.div>
               </div>
             </motion.div>

@@ -2,272 +2,206 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useAuth } from '@/hooks/useAuth';
+import { useOrders } from '@/hooks/useOrders';
+import { useFavorites } from '@/hooks/useFavorites';
+import { useBookings } from '@/hooks/useBookings';
+import { useMessages } from '@/hooks/useMessages';
 
 export default function UserDashboard() {
-  const [userData, setUserData] = useState(null);
-  const [recentOrders, setRecentOrders] = useState([]);
+  const { user, isAuthenticated, status: authStatus } = useAuth();
+  const { orders, loading: ordersLoading, fetchOrders } = useOrders();
+  const { favorites, fetchFavorites } = useFavorites();
+  const { bookings, fetchBookings } = useBookings();
+  const { messages, fetchMessages } = useMessages();
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    // Simulate fetching user data
-    setUserData({
-      name: 'John Doe',
-      email: 'user@example.com',
-      membership: 'Premium',
-      joinDate: '2024-01-15',
-    });
+    if (isAuthenticated) {
+      Promise.all([fetchOrders(), fetchFavorites(), fetchBookings(), fetchMessages()]).then(() =>
+        setLoaded(true)
+      );
+    }
+  }, [isAuthenticated, fetchOrders, fetchFavorites, fetchBookings, fetchMessages]);
 
-    // Simulate recent orders
-    setRecentOrders([
-      { id: 1, car: 'Tesla Model S', date: '2024-03-10', status: 'Delivered', price: '$89,990' },
-      { id: 2, car: 'BMW M3', date: '2024-02-28', status: 'In Transit', price: '$72,500' },
-      { id: 3, car: 'Porsche 911', date: '2024-01-20', status: 'Processing', price: '$115,000' },
-    ]);
-  }, []);
+  if (authStatus === 'loading') {
+    return (
+      <div style={{ padding: '3rem', textAlign: 'center', minHeight: '60vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <p style={{ color: 'var(--text-muted)' }}>Loading dashboard...</p>
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return (
+      <div style={{ padding: '3rem', textAlign: 'center', minHeight: '60vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '1.5rem' }}>
+        <h2 style={{ fontSize: '1.5rem' }}>Please login to access your dashboard</h2>
+        <Link href="/login" style={{ padding: '0.8rem 1.5rem', background: 'var(--gold)', color: 'var(--btn-on-gold)', fontWeight: '600', borderRadius: '4px' }}>
+          Go to Login
+        </Link>
+      </div>
+    );
+  }
+
+  const recentOrders = orders.slice(0, 5);
 
   const stats = [
-    { name: 'Total Orders', value: '12', change: '+2', changeType: 'positive' },
-    { name: 'Favorites', value: '8', change: '+1', changeType: 'positive' },
-    { name: 'Test Drives', value: '3', change: '0', changeType: 'neutral' },
-    { name: 'Messages', value: '5', change: '-2', changeType: 'negative' },
+    { name: 'Total Orders', value: loaded ? String(orders.length) : '–', icon: '🛒' },
+    { name: 'Favorites', value: loaded ? String(favorites.length) : '–', icon: '❤️' },
+    { name: 'Test Drives', value: loaded ? String(bookings.length) : '–', icon: '🚗' },
+    { name: 'Messages', value: loaded ? String(messages.length) : '–', icon: '💬' },
   ];
 
+  const statusColors = {
+    PENDING: { bg: 'rgba(201,168,76,0.15)', color: '#c9a84c' },
+    COMPLETED: { bg: 'rgba(39,174,96,0.15)', color: '#27ae60' },
+    CANCELLED: { bg: 'rgba(192,57,43,0.15)', color: '#c0392b' },
+  };
+
   return (
-    <div>
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
-        <p className="mt-2 text-gray-600">
-          Welcome back, {userData?.name || 'User'}! Here's what's happening with your account.
+    <div style={{ padding: '3rem', maxWidth: '1200px', margin: '0 auto', minHeight: '60vh' }}>
+      <div style={{ marginBottom: '2rem' }}>
+        <h1 style={{ fontSize: '2rem', fontWeight: 'bold' }}>Dashboard</h1>
+        <p style={{ marginTop: '0.5rem', color: 'var(--text-muted)' }}>
+          Welcome back, {user?.name || 'User'}! Here's what's happening with your account.
         </p>
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 mb-8">
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
         {stats.map((stat) => (
           <div
             key={stat.name}
-            className="bg-white overflow-hidden shadow rounded-lg"
+            style={{
+              background: 'var(--surface2)',
+              border: '1px solid var(--border-dim)',
+              borderRadius: 'var(--radius-sm)',
+              padding: '1.25rem 1.5rem',
+            }}
           >
-            <div className="p-5">
-              <div className="flex items-center">
-                <div className="flex-shrink-0">
-                  <div className="h-10 w-10 rounded-md bg-blue-500 flex items-center justify-center">
-                    <span className="text-white font-bold">{stat.value.charAt(0)}</span>
-                  </div>
-                </div>
-                <div className="ml-5 w-0 flex-1">
-                  <dl>
-                    <dt className="text-sm font-medium text-gray-500 truncate">
-                      {stat.name}
-                    </dt>
-                    <dd className="flex items-baseline">
-                      <div className="text-2xl font-semibold text-gray-900">
-                        {stat.value}
-                      </div>
-                      <div
-                        className={`ml-2 flex items-baseline text-sm font-semibold ${
-                          stat.changeType === 'positive'
-                            ? 'text-green-600'
-                            : stat.changeType === 'negative'
-                            ? 'text-red-600'
-                            : 'text-gray-500'
-                        }`}
-                      >
-                        {stat.change}
-                      </div>
-                    </dd>
-                  </dl>
-                </div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div>
+                <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '0.25rem' }}>{stat.name}</p>
+                <p style={{ fontSize: '1.75rem', fontWeight: 'bold' }}>{stat.value}</p>
               </div>
+              <span style={{ fontSize: '1.5rem' }}>{stat.icon}</span>
             </div>
           </div>
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1.5rem' }}>
         {/* User Info Card */}
-        <div className="lg:col-span-2">
-          <div className="bg-white shadow rounded-lg">
-            <div className="px-4 py-5 sm:p-6">
-              <h3 className="text-lg font-medium leading-6 text-gray-900">
-                Account Information
-              </h3>
-              <div className="mt-5 border-t border-gray-200">
-                <dl className="divide-y divide-gray-200">
-                  <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4">
-                    <dt className="text-sm font-medium text-gray-500">Full name</dt>
-                    <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                      {userData?.name || 'Loading...'}
-                    </dd>
-                  </div>
-                  <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4">
-                    <dt className="text-sm font-medium text-gray-500">Email address</dt>
-                    <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                      {userData?.email || 'Loading...'}
-                    </dd>
-                  </div>
-                  <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4">
-                    <dt className="text-sm font-medium text-gray-500">Membership</dt>
-                    <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                      <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                        {userData?.membership || 'Standard'}
-                      </span>
-                    </dd>
-                  </div>
-                  <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4">
-                    <dt className="text-sm font-medium text-gray-500">Member since</dt>
-                    <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                      {userData?.joinDate || 'Loading...'}
-                    </dd>
-                  </div>
-                </dl>
-              </div>
-              <div className="mt-6 flex space-x-3">
-                <Link
-                  href="/user/profile"
-                  className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                >
-                  Edit Profile
-                </Link>
-                <Link
-                  href="/user/settings"
-                  className="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                >
-                  Account Settings
-                </Link>
-              </div>
+        <div style={{ background: 'var(--surface2)', border: '1px solid var(--border-dim)', borderRadius: 'var(--radius-sm)', padding: '1.75rem' }}>
+          <h3 style={{ fontSize: '1.1rem', fontWeight: '600', marginBottom: '1.25rem' }}>Account Information</h3>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
+            <div>
+              <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Full name</p>
+              <p style={{ fontWeight: '500' }}>{user?.name || 'Loading...'}</p>
+            </div>
+            <div>
+              <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Email address</p>
+              <p style={{ fontWeight: '500' }}>{user?.email || 'Loading...'}</p>
+            </div>
+            <div>
+              <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Role</p>
+              <span style={{
+                display: 'inline-block',
+                padding: '0.15rem 0.6rem',
+                borderRadius: '999px',
+                fontSize: '0.75rem',
+                fontWeight: '600',
+                background: user?.role === 'ADMIN' ? 'rgba(192,57,43,0.15)' : 'rgba(39,174,96,0.15)',
+                color: user?.role === 'ADMIN' ? '#c0392b' : '#27ae60',
+              }}>
+                {user?.role === 'ADMIN' ? 'Admin' : 'Member'}
+              </span>
             </div>
           </div>
+          <div style={{ marginTop: '1.25rem', display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+            <Link href="/profile" style={{ padding: '0.55rem 1.2rem', background: 'var(--gold)', color: 'var(--btn-on-gold)', fontWeight: '600', borderRadius: '4px', fontSize: '0.85rem' }}>
+              Edit Profile
+            </Link>
+            <Link href="/settings" style={{ padding: '0.55rem 1.2rem', border: '1px solid var(--border)', color: 'var(--text)', borderRadius: '4px', fontSize: '0.85rem' }}>
+              Account Settings
+            </Link>
+          </div>
+        </div>
 
-          {/* Recent Orders */}
-          <div className="mt-8 bg-white shadow rounded-lg">
-            <div className="px-4 py-5 sm:p-6">
-              <h3 className="text-lg font-medium leading-6 text-gray-900">
-                Recent Orders
-              </h3>
-              <div className="mt-5">
-                <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
-                  <table className="min-w-full divide-y divide-gray-300">
-                    <thead className="bg-gray-50">
-                      <tr>
-                        <th className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                          Car
-                        </th>
-                        <th className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                          Date
-                        </th>
-                        <th className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                          Status
-                        </th>
-                        <th className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                          Price
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-gray-200 bg-white">
-                      {recentOrders.map((order) => (
-                        <tr key={order.id}>
-                          <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
-                            {order.car}
+        {/* Recent Orders */}
+        <div style={{ background: 'var(--surface2)', border: '1px solid var(--border-dim)', borderRadius: 'var(--radius-sm)', padding: '1.75rem' }}>
+          <h3 style={{ fontSize: '1.1rem', fontWeight: '600', marginBottom: '1.25rem' }}>Recent Orders</h3>
+          {ordersLoading && <p style={{ color: 'var(--text-muted)' }}>Loading orders...</p>}
+          {!ordersLoading && recentOrders.length === 0 && (
+            <p style={{ color: 'var(--text-muted)' }}>No orders yet. <Link href="/cars" style={{ color: 'var(--gold)' }}>Browse cars</Link></p>
+          )}
+          {recentOrders.length > 0 && (
+            <>
+              <div style={{ overflowX: 'auto' }}>
+                <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+                  <thead>
+                    <tr style={{ borderBottom: '1px solid var(--border-dim)' }}>
+                      <th style={{ textAlign: 'left', padding: '0.6rem 0.5rem', fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: '500' }}>Car</th>
+                      <th style={{ textAlign: 'left', padding: '0.6rem 0.5rem', fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: '500' }}>Date</th>
+                      <th style={{ textAlign: 'left', padding: '0.6rem 0.5rem', fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: '500' }}>Status</th>
+                      <th style={{ textAlign: 'right', padding: '0.6rem 0.5rem', fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: '500' }}>Price</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {recentOrders.map((order) => {
+                      const sc = statusColors[order.status] || statusColors.PENDING;
+                      return (
+                        <tr key={order.id} style={{ borderBottom: '1px solid var(--border-dim)' }}>
+                          <td style={{ padding: '0.75rem 0.5rem', fontSize: '0.9rem' }}>{order.car?.name || 'Vehicle'}</td>
+                          <td style={{ padding: '0.75rem 0.5rem', fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+                            {new Date(order.createdAt).toLocaleDateString()}
                           </td>
-                          <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                            {order.date}
-                          </td>
-                          <td className="whitespace-nowrap px-3 py-4 text-sm">
-                            <span
-                              className={`inline-flex rounded-full px-2 text-xs font-semibold leading-5 ${
-                                order.status === 'Delivered'
-                                  ? 'bg-green-100 text-green-800'
-                                  : order.status === 'In Transit'
-                                  ? 'bg-yellow-100 text-yellow-800'
-                                  : 'bg-blue-100 text-blue-800'
-                              }`}
-                            >
+                          <td style={{ padding: '0.75rem 0.5rem' }}>
+                            <span style={{
+                              display: 'inline-block',
+                              padding: '0.15rem 0.6rem',
+                              borderRadius: '999px',
+                              fontSize: '0.7rem',
+                              fontWeight: '600',
+                              background: sc.bg,
+                              color: sc.color,
+                            }}>
                               {order.status}
                             </span>
                           </td>
-                          <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
-                            {order.price}
+                          <td style={{ padding: '0.75rem 0.5rem', fontSize: '0.9rem', textAlign: 'right', color: 'var(--gold)' }}>
+                            ${order.pricePaid?.toLocaleString()}
                           </td>
                         </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-                <div className="mt-4 text-center">
-                  <Link
-                    href="/user/orders"
-                    className="text-sm font-medium text-blue-600 hover:text-blue-500"
-                  >
-                    View all orders
-                  </Link>
-                </div>
+                      );
+                    })}
+                  </tbody>
+                </table>
               </div>
-            </div>
-          </div>
+              <div style={{ marginTop: '1rem', textAlign: 'center' }}>
+                <Link href="/orders" style={{ fontSize: '0.85rem', color: 'var(--gold)', fontWeight: '500' }}>
+                  View all orders →
+                </Link>
+              </div>
+            </>
+          )}
         </div>
+      </div>
 
-        {/* Quick Actions Sidebar */}
-        <div>
-          <div className="bg-white shadow rounded-lg">
-            <div className="px-4 py-5 sm:p-6">
-              <h3 className="text-lg font-medium leading-6 text-gray-900">
-                Quick Actions
-              </h3>
-              <div className="mt-5 space-y-4">
-                <Link
-                  href="/cars"
-                  className="w-full flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
-                >
-                  Browse Cars
-                </Link>
-                <Link
-                  href="/sell"
-                  className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
-                >
-                  Sell Your Car
-                </Link>
-                <Link
-                  href="/testdrive"
-                  className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
-                >
-                  Schedule Test Drive
-                </Link>
-                <Link
-                  href="/financing"
-                  className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
-                >
-                  Check Financing
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-8 bg-white shadow rounded-lg">
-            <div className="px-4 py-5 sm:p-6">
-              <h3 className="text-lg font-medium leading-6 text-gray-900">
-                Route Structure Demo
-              </h3>
-              <div className="mt-4 space-y-3">
-                <p className="text-sm text-gray-600">
-                  This is the user dashboard route at:
-                </p>
-                <code className="block text-xs bg-gray-100 p-2 rounded">
-                  app/(user)/dashboard/page.js
-                </code>
-                <p className="text-sm text-gray-600 mt-4">
-                  Other user routes:
-                </p>
-                <ul className="text-sm text-gray-600 space-y-1">
-                  <li>• /user/profile</li>
-                  <li>• /user/orders</li>
-                  <li>• /user/favorites</li>
-                  <li>• /user/settings</li>
-                  <li>• /user/messages</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
+      {/* Quick Actions */}
+      <div style={{ marginTop: '1.5rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem' }}>
+        <Link href="/cars" style={{ padding: '1rem', background: 'var(--gold)', color: 'var(--btn-on-gold)', fontWeight: '600', borderRadius: '4px', textAlign: 'center' }}>
+          Browse Cars
+        </Link>
+        <Link href="/sell" style={{ padding: '1rem', border: '1px solid var(--border)', color: 'var(--text)', fontWeight: '600', borderRadius: '4px', textAlign: 'center' }}>
+          Sell Your Car
+        </Link>
+        <Link href="/testdrive" style={{ padding: '1rem', border: '1px solid var(--border)', color: 'var(--text)', fontWeight: '600', borderRadius: '4px', textAlign: 'center' }}>
+          Schedule Test Drive
+        </Link>
+        <Link href="/financing" style={{ padding: '1rem', border: '1px solid var(--border)', color: 'var(--text)', fontWeight: '600', borderRadius: '4px', textAlign: 'center' }}>
+          Check Financing
+        </Link>
       </div>
     </div>
   );

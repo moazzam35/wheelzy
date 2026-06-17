@@ -1,7 +1,9 @@
 "use client";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { useAuth } from "@/hooks/useAuth";
 import styles from "./login.module.css";
 
 const EyeIcon = ({ open }) =>
@@ -37,6 +39,8 @@ const EyeIcon = ({ open }) =>
   );
 
 export default function LoginPage() {
+  const router = useRouter();
+  const { login } = useAuth();
   const [form, setForm] = useState({ email: "", password: "" });
   const [showPass, setShowPass] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -52,9 +56,13 @@ export default function LoginPage() {
       return;
     }
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 1400));
+    const result = await login(form.email, form.password);
     setLoading(false);
-    // Replace with your actual auth logic
+    if (result.success) {
+      router.push("/dashboard");
+    } else {
+      setError(result.error || "Invalid email or password.");
+    }
   };
 
   return (

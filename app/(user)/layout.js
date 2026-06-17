@@ -3,11 +3,13 @@ import "./globals.css";
 import Header from "./Header/page";
 import Footer from "./Footer/page";
 import Preloader from "./preloader/preloader";
+import AuthProvider from "@/context/AuthContext";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata = {
+  metadataBase: new URL(process.env.NEXTAUTH_URL || "http://localhost:3000"),
   title: "Wheelzy | Premium Automotive Collection",
   description: "Discover a curated selection of luxury, sports, and exotic vehicles. White-glove delivery, tailored financing, and unparalleled automotive excellence.",
   openGraph: {
@@ -36,10 +38,12 @@ export default function RootLayout({ children }) {
         {/* plain <script> as first child of body — runs before paint, avoids <head> hydration conflicts */}
         <script id="theme-script" suppressHydrationWarning dangerouslySetInnerHTML={{ __html: themeScript }
       } />
-      <Preloader/>
+      <AuthProvider>
+        <Preloader/>
         <Header />
         <main>{children}</main>
         <Footer />
+      </AuthProvider>
       </body>
     </html>
   );
