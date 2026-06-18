@@ -14,6 +14,7 @@ const nextConfig = {
   compress: true,
   poweredByHeader: false,
   generateEtags: true,
+  serverExternalPackages: ['@prisma/client'],
 };
 
 export default nextConfig;
